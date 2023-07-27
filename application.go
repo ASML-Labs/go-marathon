@@ -67,7 +67,7 @@ type Application struct {
 	Networks    *[]PodNetwork `json:"networks,omitempty"`
 
 	// Contains non-secret environment variables. Secrets environment variables are part of the Secrets map.
-	Env                        *map[string]string  `json:"-"`
+	Env                        *map[string]interface{}  `json:"-"`
 	Executor                   *string             `json:"executor,omitempty"`
 	HealthChecks               *[]HealthCheck      `json:"healthChecks,omitempty"`
 	ReadinessChecks            *[]ReadinessCheck   `json:"readinessChecks,omitempty"`
@@ -384,7 +384,7 @@ func (r *Application) AddEnv(name, value string) *Application {
 // the environments of an application that already has environments set (setting env to nil will
 // keep the current value)
 func (r *Application) EmptyEnvs() *Application {
-	r.Env = &map[string]string{}
+	r.Env = &map[string]interface{}{}
 
 	return r
 }
